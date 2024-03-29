@@ -63,7 +63,7 @@ namespace Oparski
 
             if(BonusRoll == true)
             {
-                if (rolls[1] < 10)
+                if (rolls[1] < 10 && rolls[0] + rolls[1] != 10)
                 {
                     do
                     {
