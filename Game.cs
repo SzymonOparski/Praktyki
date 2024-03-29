@@ -8,7 +8,7 @@ namespace Oparski
 {
     internal class Game
     {
-        int howManyRolls = 0, value, current = 0, points = 0, numberInResults = 0, pointsInResults = 0;
+        int howManyRolls = 0, value, current = 0, points = 0, pointsInResults = 0;
         int[] rolls = new int[3], frame = new int[10], frameOfRolls = new int[23], results = new int[20];
         bool BonusRoll = false;
 
@@ -17,7 +17,6 @@ namespace Oparski
             Game game = new Game();
             game.BowlingGame();
         }
-
         public void BowlingGame() 
         {
             while (howManyRolls < 10)
@@ -27,6 +26,7 @@ namespace Oparski
                     Console.WriteLine("Podaj ilosc zbitych kregli w pierwszym rzucie: ");
                 } while (!int.TryParse(Console.ReadLine(), out value) || value < 0 || value > 10);
                 rolls[0] = value;
+
                 if (value == 10)
                 {
                     if (howManyRolls != 9)
@@ -60,6 +60,7 @@ namespace Oparski
                     howManyRolls += 1;
                 }
             }
+
             if(BonusRoll == true)
             {
                 if (rolls[1] < 10)
@@ -76,19 +77,18 @@ namespace Oparski
                         Console.WriteLine("Podaj ilosc zbitych kregli w bonusowym rzucie: ");
                     } while (!int.TryParse(Console.ReadLine(), out value) || value < 0 || value > 10);
                 }
-               
                 Console.Clear();
                 frame[9] = points + value + frameOfRolls[19] + frameOfRolls[18];
                 Console.WriteLine("Aktualny wynik: " + frame[9]);
             }
             PrintFrame();
         }
-
         public void Roll(int first, int second)
         {
             frameOfRolls[current] = first;
             frameOfRolls[current +1] = second;
             current+=2;
+
             if(howManyRolls == 9 && first + second >= 10)
             {
                 BonusRoll = true;
@@ -97,6 +97,7 @@ namespace Oparski
         public void GetScore()
         {
             points = 0;
+
             for(int i = 0; i < 21; i+=2) 
             {
                 if (frameOfRolls[i] + frameOfRolls[i+1] == 10 && frameOfRolls[i] != 10 && frameOfRolls[i+2] != 0) //spare
@@ -127,7 +128,6 @@ namespace Oparski
             Console.WriteLine("Aktualny wynik: " + points);
             frame[howManyRolls] = points;
         }
-
         public void PrintFrame()
         {
             for(int i = 0; i <9; i++)
